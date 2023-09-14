@@ -1,0 +1,83 @@
+﻿@model AutomobileInsuranceManagement_AIM.Models.user
+
+@{
+    ViewBag.Title = "DeleteUser";
+}
+
+<h2>DeleteUser</h2>
+
+<h3>Are you sure you want to delete this Record?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+          UserName:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.userName)
+        </dd>
+
+        <dt>
+           Email:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+          Created Date:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.createdDate)
+        </dd>
+
+        <dt>
+         Modified Date:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.modifiedDate)
+        </dd>
+
+        <dt>
+         Mobile:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mobile)
+        </dd>
+
+        <dt>
+            Profile Pic:  <img src="data:image;base64,@Convert.ToBase64String(Model.profilePic)" alt="User Image" width="70" class="rounded-circle" />
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role.roleName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role.roleName)
+        </dd>
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "UserList")
+        </div>
+    }
+</div>

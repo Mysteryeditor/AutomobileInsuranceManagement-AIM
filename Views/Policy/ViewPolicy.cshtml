@@ -1,0 +1,82 @@
+﻿@model AutomobileInsuranceManagement_AIM.Models.Policy
+
+@{
+    ViewBag.Title = "ViewPolicy";
+}
+
+<h2>ViewPolicy</h2>
+
+<div>
+    <h4>Policy</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.policyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.policyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.claimAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.claimAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Premium)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premium)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.years)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.years)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AutomobileType.autoType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AutomobileType.autoType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsuranceType.TypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsuranceType.TypeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.policyId }) |
+    @Html.ActionLink("Back to List", "PolicyList")
+</p>

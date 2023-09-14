@@ -1,0 +1,88 @@
+﻿@model AutomobileInsuranceManagement_AIM.Models.Policy
+
+@{
+    ViewBag.Title = "DeleteResult";
+}
+
+<h2>DeleteResult</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Policy</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.policyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.policyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.claimAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.claimAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Premium)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premium)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.years)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.years)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AutomobileType.autoType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AutomobileType.autoType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsuranceType.TypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsuranceType.TypeName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "PolicyList")
+        </div>
+    }
+</div>

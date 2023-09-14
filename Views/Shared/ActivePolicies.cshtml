@@ -1,0 +1,42 @@
+﻿@{
+
+}
+
+<div class="d-flex row">
+    @foreach (AutomobileInsuranceManagement_AIM.Models.ActivePolicy po in ViewBag.chosenPolicies)
+    {
+
+        foreach (AutomobileInsuranceManagement_AIM.Models.Policy policy in ViewBag.chosenPolicyInfo)
+        {
+            //foreach (AutomobileInsuranceManagement_AIM.Models.Automobile automobile in ViewBag.automobileData)
+            //{
+
+
+            <div class="card col-lg-4 mx-2">
+                <div class="card-title ">
+                    <h3 class="text-center text-capitalize">
+                        @policy.policyName
+                    </h3>
+                </div>
+                <div class="card-body">
+                    @*@automobile.model*@
+                    @po.renewalDate
+                </div>
+
+                <div class="card-footer">
+                    <button class="btn btn-outline-primary">
+                        @Html.ActionLink("Details", "ExpandUserPolicy", "Policy", new { policyId = po.policyId }, new { @class = "nav-link" })
+                    </button>
+                </div>
+
+            </div>
+            //}
+        }
+
+    }
+</div>
+
+@for(int i = 0; i < @ViewBag.chosenPolicies.length; i++)
+{
+    <label>@ViewBag.chosenPolicies[0].policyId;</label>
+}

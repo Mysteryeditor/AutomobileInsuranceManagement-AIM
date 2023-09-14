@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AutomobileInsuranceManagement_AIM.Models.ActivePolicy>
+
+@{
+    ViewBag.Title = "ViewUserPolicy";
+}
+
+<h2>ViewUserPolicy</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.createdDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.renewalDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Policy.policyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user.userName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.createdDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.renewalDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Policy.policyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user.userName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ActiveId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ActiveId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ActiveId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<AutomobileInsuranceManagement_AIM.Models.Policy>
+
+@{
+    ViewBag.Title = "PolicyList";
+}
+
+<h2>PolicyList</h2>
+
+<p>
+    @Html.ActionLink("Add New", "CreateNewPolicy")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.policyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.claimAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Premium)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.years)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            Vehicle
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.InsuranceType.TypeName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.policyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.claimAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Premium)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.years)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AutomobileType.autoType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.InsuranceType.TypeName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditPolicy", new { policyId = item.policyId }) |
+            @Html.ActionLink("Details", "ViewPolicy", new { policyId = item.policyId }) |
+            @Html.ActionLink("Delete", "DeleteResult", new { policyId = item.policyId })
+        </td>
+    </tr>
+}
+
+</table>

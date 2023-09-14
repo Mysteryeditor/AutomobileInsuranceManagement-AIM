@@ -1,0 +1,29 @@
+﻿@model AutomobileInsuranceManagement_AIM.Models.user
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "User", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.email)
+        @Html.TextBoxFor(m => m.email)
+        @Html.ValidationMessageFor(m => m.email)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.password)
+        @Html.PasswordFor(m => m.password)
+        @Html.ValidationMessageFor(m => m.password)
+    </div>
+
+
+    <div class="form-group">
+        <button type="submit">Enter</button>
+    </div>
+
+}
+

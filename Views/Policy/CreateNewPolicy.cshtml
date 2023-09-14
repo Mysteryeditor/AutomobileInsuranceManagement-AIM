@@ -1,0 +1,87 @@
+﻿@model AutomobileInsuranceManagement_AIM.Models.Policy
+
+@{
+    ViewBag.Title = "CreateNewPolicy";
+}
+
+<h2>Create New Policy</h2>
+<div class="contaniner d-flex justify-content-center">
+    <div class="card col-lg-10 text-center ">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group my-3">
+                    <label class="col-lg-2">Name Of The Policy</label>
+                    <label class="col-lg-4">
+                        @Html.EditorFor(model => model.policyName, new { htmlAttributes = new { @class = "form-control" } })
+                      
+                    </label>
+                    <small>  @Html.ValidationMessageFor(model => model.policyName, "", new { @class = "text-danger" })</small>
+
+                </div>
+
+                <div class="form-group my-3">
+                    <label class="col-lg-2">Claim Amount</label>
+                    <label class="col-lg-4">
+                        @Html.EditorFor(model => model.claimAmount, new { htmlAttributes = new { @class = "form-control" } })
+                    </label>
+                    <small>@Html.ValidationMessageFor(model => model.claimAmount, "", new { @class = "text-danger" })</small>
+                </div>
+
+                <div class="form-group my-3">
+                    <label class="col-lg-2">Premium</label>
+                    <label class="col-lg-4">
+                        @Html.EditorFor(model => model.Premium, new { htmlAttributes = new { @class = "form-control" } })
+                    </label>
+                    <small>@Html.ValidationMessageFor(model => model.Premium, "", new { @class = "text-danger" })</small>
+                </div>
+            </div>
+
+            <div class="form-group my-3">
+                <label class="col-lg-2">Duration</label>
+                <label class="col-lg-4">
+                    @Html.EditorFor(model => model.years, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+                <small>@Html.ValidationMessageFor(model => model.years, "", new { @class = "text-danger" })</small>
+            </div>
+
+            <div class="form-group my-3">
+                <label class="col-lg-2">Description</label>
+                <label class="col-lg-4">
+                    @Html.TextAreaFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                </label>
+                <small> @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })</small>
+            </div>
+
+            <div class="form-group my-3">
+                    <label class="col-lg-2">Automobile Type</label>
+                    <label class="col-lg-4">
+                        @Html.DropDownList("automobileTypeId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.automobileTypeId, "", new { @class = "text-danger" })
+                    </label>
+                </div>
+
+            <div class="form-group my-3">
+                    <label  class="col-lg-2">Type Of The Insurance</label>
+                    <label class="col-lg-4">
+                        @Html.DropDownList("insuranceTypeId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.insuranceTypeId, "", new { @class = "text-danger" })
+                    </label>
+                </div>
+
+            <div class="form-group my-3">
+                <div class="text-center">
+                    <input type="submit" value="Create" class="btn btn-outline-info mx-2" />
+                    <label class="btn btn-outline-danger">
+                        @Html.ActionLink("Back to List", "Index", new { area = "" }, new { @class = "nav-link mx-2" })
+                    </label>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
