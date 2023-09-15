@@ -56,5 +56,14 @@ namespace AutomobileInsuranceManagement_AIM.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RoleDecider_Result>("RoleDecider", emailParameter, passwordParameter);
         }
+    
+        public virtual ObjectResult<SP_ReturnPolicy_Result> SP_ReturnPolicy(Nullable<int> automobileId)
+        {
+            var automobileIdParameter = automobileId.HasValue ?
+                new ObjectParameter("automobileId", automobileId) :
+                new ObjectParameter("automobileId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_ReturnPolicy_Result>("SP_ReturnPolicy", automobileIdParameter);
+        }
     }
 }

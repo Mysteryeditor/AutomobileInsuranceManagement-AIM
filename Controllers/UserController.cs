@@ -29,7 +29,7 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
 
         public ActionResult Register([Bind(Include = "userName,password,email,mobile,DOB")] user newUser, HttpPostedFileBase profilePic)
         {
-  
+
             bool uniqueEmail = true;
             List<string> existingemails = (from s in dataconnection.users select s.email).ToList();
             foreach (string email in existingemails)
@@ -97,23 +97,31 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
                     Response.Cookies.Add(cookie);
                     user liveUser = dataconnection.users.FirstOrDefault(x => x.email == loginCredentials.email);
                     Session["username"] = liveUser.userName;
-                    Session["userId"]=liveUser.userId;
-                    Session["policyActive"]=liveUser.policyActive;
+                    Session["userId"] = liveUser.userId;
+                    Session["policyActive"] = liveUser.policyActive;
                     Session["profilePic"] = liveUser.profilePic;
-                    return RedirectToAction("DashBoard","Home");
+                    return RedirectToAction("DashBoard", "Home");
             }
             return View();
 
         }
 
-        public ActionResult CreateUser() {
+        public ActionResult CreateUser()
+        {
             return View();
+        }
+
+        public ActionResult EditProfile()
+        {
+            int activeUserId = (int)Session["userId"];
+            user EditUser = dataconnection.users.Find(activeUserId);
+            return View(EditUser);
         }
 
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

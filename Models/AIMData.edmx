@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AIMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ActivePolicies">
           <Key>
             <PropertyRef Name="ActiveId" />
@@ -203,6 +203,9 @@
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="password" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SP_ReturnPolicy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="automobileId" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="AIMModelStoreContainer">
           <EntitySet Name="ActivePolicies" EntityType="Self.ActivePolicies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Automobiles" EntityType="Self.Automobiles" Schema="dbo" store:Type="Tables" />
@@ -248,8 +251,7 @@
             <End Role="users1" EntitySet="users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AIMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -507,11 +509,14 @@
             <End Role="users1" EntitySet="users" />
           </AssociationSet>
           <FunctionImport Name="RETURNPOLICY" ReturnType="Collection(AIMModel.RETURNPOLICY_Result)">
-            <Parameter Name="userId" Mode="In" Type="Int32" />
+          <Parameter Name="userId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RoleDecider" ReturnType="Collection(AIMModel.RoleDecider_Result)">
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_ReturnPolicy" ReturnType="Collection(AIMModel.SP_ReturnPolicy_Result)">
+            <Parameter Name="automobileId" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="RETURNPOLICY_Result">
@@ -528,6 +533,27 @@
         <ComplexType Name="RoleDecider_Result">
           <Property Type="Int32" Name="userId" Nullable="true" />
           <Property Type="String" Name="Roles" Nullable="true" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="SP_ReturnPolicy_Result">
+          <Property Type="Int32" Name="policyId" Nullable="false" />
+          <Property Type="String" Name="policyName" Nullable="true" />
+          <Property Type="Decimal" Name="claimAmount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="Premium" Nullable="true" Precision="10" />
+          <Property Type="Int32" Name="years" Nullable="true" />
+          <Property Type="Boolean" Name="isDeleted" Nullable="true" />
+          <Property Type="String" Name="description" Nullable="true" />
+          <Property Type="Int32" Name="automobileTypeId" Nullable="true" />
+          <Property Type="Int32" Name="insuranceTypeId" Nullable="true" />
+          <Property Type="Int32" Name="automobile_Id" Nullable="false" />
+          <Property Type="String" Name="model" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="registration_number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="chassis_number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="brand" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="weight" Nullable="false" />
+          <Property Type="Int32" Name="manufacture_year" Nullable="false" />
+          <Property Type="Int32" Name="userId" Nullable="true" />
+          <Property Type="Int32" Name="vehicle_Type" Nullable="true" />
+          <Property Type="Boolean" Name="isInsured" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -641,6 +667,31 @@
               <ComplexTypeMapping TypeName="AIMModel.RoleDecider_Result">
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="Roles" ColumnName="Roles" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_ReturnPolicy" FunctionName="AIMModel.Store.SP_ReturnPolicy">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AIMModel.SP_ReturnPolicy_Result">
+                <ScalarProperty Name="policyId" ColumnName="policyId" />
+                <ScalarProperty Name="policyName" ColumnName="policyName" />
+                <ScalarProperty Name="claimAmount" ColumnName="claimAmount" />
+                <ScalarProperty Name="Premium" ColumnName="Premium" />
+                <ScalarProperty Name="years" ColumnName="years" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="automobileTypeId" ColumnName="automobileTypeId" />
+                <ScalarProperty Name="insuranceTypeId" ColumnName="insuranceTypeId" />
+                <ScalarProperty Name="automobile_Id" ColumnName="automobile_Id" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="registration_number" ColumnName="registration_number" />
+                <ScalarProperty Name="chassis_number" ColumnName="chassis_number" />
+                <ScalarProperty Name="brand" ColumnName="brand" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="manufacture_year" ColumnName="manufacture_year" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="vehicle_Type" ColumnName="vehicle_Type" />
+                <ScalarProperty Name="isInsured" ColumnName="isInsured" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

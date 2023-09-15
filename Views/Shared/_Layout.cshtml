@@ -16,6 +16,10 @@
             .anchorTags:hover {
                 color: azure;
             }
+
+        a {
+            text-decoration: none;
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>
@@ -23,13 +27,24 @@
     @{
         string username = Session["username"] as string;
         byte[] profilePic = Session["profilePic"] as byte[];
+
+
     }
 </head>
 <body>
 
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            @Html.ActionLink("AIM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @if (!User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("AIM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            }
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("AIM", "DashBoard", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            }
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -53,41 +68,45 @@
                     }
                     @if (!User.Identity.IsAuthenticated)
                     {
+
                         <li class="ms-auto mx-2"><button class="btn btn-outline-primary">@Html.ActionLink("Register", "Register", "User", new { area = "" }, new { @class = "anchorTags" })</button></li>
                         <li><button class="btn btn-outline-danger">@Html.ActionLink("Login", "Login", "User", new { area = "" }, new { @class = "anchorTags" })</button></li>
                     }
 
                     @if (User.Identity.IsAuthenticated)
                     {
+
                         <li class="ms-auto mx-2">
-            <label class="text-white">@username</label><img src="data:image;base64,@Convert.ToBase64String(profilePic)" alt="Employee Image" class="rounded-circle ms-1" width="60" height="40" />
-            <button class="btn btn-outline-danger">@Html.ActionLink("Logout", "Logout", "User", new { area = "" }, new { @class = "anchorTags" })</button>
-            </li>
+                            <label class="text-white">@username</label><img src="data:image;base64,@Convert.ToBase64String(profilePic)" alt="Employee Image" class="rounded-circle ms-1" width="60" height="40" />
+                            <button class="btn btn-outline-danger">@Html.ActionLink("Logout", "Logout", "User", new { area = "" }, new { @class = "anchorTags" })</button>
+                        </li>
 
-        }
+                    }
+
+                    <li>@Html.ActionLink("Edit User", "EditProfile", "User", new { area = "" }, new { @class = "nav-link" })</li>
 
 
+                </ul>
 
-                    </ul>
+                @*<button id="button">fagaefgferagaergaergaerggraerg</button>*@
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid body-content">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+    <script type="text/javascript">
+        $("#button").click(function () {
+            swal("Hello from swal");
+        })
 
-                    @*<button id="button">fagaefgferagaergaergaerggraerg</button>*@
-                    </div>
-                    </div>
-                </nav>
-                <div class="container-fluid body-content">
-                    <div class="container">
-                        @RenderBody()
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    $("#button").click(function () {
-                        swal("Hello from swal");
-                    })
+    </script>
 
-                </script>
 
-                @Scripts.Render("~/bundles/jquery")
-                @Scripts.Render("~/bundles/bootstrap")
-                @RenderSection("scripts", required: false)
-            </body>
-        </html>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

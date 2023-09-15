@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\NToastNotify.8.0.0\build\NToastNotify.props" Condition="Exists('packages\NToastNotify.8.0.0\build\NToastNotify.props')" />
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -130,6 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PolicyController.cs" />
     <Compile Include="Controllers\SweetController.cs" />
@@ -175,6 +177,9 @@
       <DependentUpon>AIMData.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RoleDecider_Result.cs">
+      <DependentUpon>AIMData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SP_ReturnPolicy_Result.cs">
       <DependentUpon>AIMData.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
@@ -229,6 +234,8 @@
     <Content Include="Content\sweetalert\sweet-alert-animations.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="wwwroot\noty.js" />
+    <Content Include="wwwroot\toastr.js" />
     <EntityDeploy Include="Models\AIMData.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AIMData.Designer.cs</LastGenOutput>
@@ -277,6 +284,11 @@
     <Content Include="Views\Policy\DeleteResult.cshtml" />
     <Content Include="Views\Policy\ViewUserPolicy.cshtml" />
     <Content Include="Views\Shared\ActivePolicies.cshtml" />
+    <Content Include="Views\Shared\_UserAutoMobiles.cshtml" />
+    <Content Include="Views\User\EditProfile.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Policy\AddPolicyManual.cshtml" />
+    <Content Include="Views\Shared\_ChoosingPolicy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -347,6 +359,7 @@
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\NToastNotify.8.0.0\build\NToastNotify.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NToastNotify.8.0.0\build\NToastNotify.props'))" />
   </Target>
   <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -3,40 +3,60 @@
 }
 
 <div class="d-flex row">
-    @foreach (AutomobileInsuranceManagement_AIM.Models.ActivePolicy po in ViewBag.chosenPolicies)
+    @foreach (AutomobileInsuranceManagement_AIM.Models.Policy po in ViewBag.chosenPolicyInfo)
     {
-
-        foreach (AutomobileInsuranceManagement_AIM.Models.Policy policy in ViewBag.chosenPolicyInfo)
+        foreach (AutomobileInsuranceManagement_AIM.Models.ActivePolicy policy in ViewBag.chosenPolicies)
         {
-            //foreach (AutomobileInsuranceManagement_AIM.Models.Automobile automobile in ViewBag.automobileData)
-            //{
 
+            if (po.policyId == policy.policyId)
+            {
 
-            <div class="card col-lg-4 mx-2">
-                <div class="card-title ">
-                    <h3 class="text-center text-capitalize">
-                        @policy.policyName
-                    </h3>
-                </div>
-                <div class="card-body">
-                    @*@automobile.model*@
-                    @po.renewalDate
-                </div>
+                foreach (AutomobileInsuranceManagement_AIM.Models.Automobile auto in ViewBag.autoMobileData)
+                {
+                    if (policy.automobileId == auto.automobile_Id)
+                    {
+                        <div class="card col-lg-4 mx-2">
+                            <div class="card-title ">
+                                <h3 class="text-center text-capitalize">
+                                    @po.policyName
+                                </h3>
+                            </div>
+                            <div class="card-body">
+                                @*@automobile.model*@
+                                <div class="d-flex col-12">
+                                    <label class="fs-5 fw-bold">Renewal:</label>
+                                    <label>@policy.renewalDate.ToString().Substring(0, 10)</label>
+                                </div>
+                                <div class="d-flex col-12">
+                                    <label style="font-size:20px">Automobile:</label>
+                                    <label class="mt-lg-1 ">@auto.model</label>
+                                </div>
 
-                <div class="card-footer">
-                    <button class="btn btn-outline-primary">
-                        @Html.ActionLink("Details", "ExpandUserPolicy", "Policy", new { policyId = po.policyId }, new { @class = "nav-link" })
-                    </button>
-                </div>
+                            </div>
 
-            </div>
-            //}
+                            <div class="card-footer">
+                                <div class="d-flex">
+                                    <button class="btn btn-outline-primary">
+                                        @Html.ActionLink("Details", "ExpandUserPolicy", "Policy", new { policyId = po.policyId }, new { @class = "nav-link" })
+                                    </button>
+                                    @if (policy.IsActive == false)
+                                    {
+                                        <button class="btn btn-outline-primary">
+                                            @Html.ActionLink("Activate", "ExpandUserPolicy", "Policy", new { policyId = po.policyId }, new { @class = "nav-link" })
+                                        </button>
+                                    }
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    }
+                }
+            }
         }
 
     }
+ 
 </div>
 
-@for(int i = 0; i < @ViewBag.chosenPolicies.length; i++)
-{
-    <label>@ViewBag.chosenPolicies[0].policyId;</label>
-}

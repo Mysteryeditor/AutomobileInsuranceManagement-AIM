@@ -1,0 +1,38 @@
+﻿@{
+    int? activecount = (int)Session["policyActive"];
+}
+
+<div class="container-fluid col-10 p-3">
+
+    <p class="fs-6">Are you ready to hit the road with confidence, knowing that your precious vehicle is safeguarded against unexpected twists and turns? Look no further! Our Automobile Insurance Policy is tailor-made to provide you with comprehensive protection, giving you the peace of mind you deserve.</p>
+    <h4 class="text-center">Choose A Policy</h4>
+    <div class="d-flex row">
+        @foreach (AutomobileInsuranceManagement_AIM.Models.RETURNPOLICY_Result po in ViewBag.availablePolices)
+        {
+            <div class="card col-lg-3">
+                <div class="card-title ">
+                    <h3 class="text-center text-capitalize">
+                        @po.policyName
+                    </h3>
+                </div>
+                <div class="card-body">
+                    @po.description
+                </div>
+
+                <div class="card-footer">
+                    <button class="btn-outline-primary">
+                        @Html.ActionLink("Choose", "AddUserPolicy", "Policy", new { policyId = po.policyId }, new { @class = "nav-link" })
+                    </button>
+
+                    @if (activecount > 1)
+                    {
+                        <button class="btn-outline-primary">
+                            @Html.ActionLink("Choose", "AddUserPolicy", "Policy", new { policyId = po.policyId }, new { @class = "nav-link" })
+                        </button>
+                    }
+                </div>
+
+            </div>
+        }
+    </div>
+</div>

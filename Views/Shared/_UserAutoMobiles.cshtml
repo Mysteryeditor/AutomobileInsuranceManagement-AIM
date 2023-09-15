@@ -1,0 +1,31 @@
+﻿@foreach(AutomobileInsuranceManagement_AIM.Models.Automobile obj in ViewBag.activeUserVehicles)
+{
+    <div class="card col-3 mx-3 my-2">
+       <div class="d-flex my-2">
+           <h6>Model:</h6>
+           <label>@obj.model</label>
+       </div>
+
+       <div class="d-flex my-2">
+           <h6>Brand:</h6>
+           <label>@obj.brand</label>
+       </div>
+
+       <div class="d-flex my-2">
+           <button class="btn btn-outline-danger col-4 mx-auto my-2">Details</button>
+           @if (obj.isInsured == true)
+           {
+               <button class="btn btn-outline-info col-4 mx-auto my-2">View Policy</button>
+           }
+           else
+           {
+               <button class="btn btn-outline-primary col-4 mx-auto my-2">Policy+</button>
+           }
+       </div>
+        
+       
+    </div>
+}
+
+
+

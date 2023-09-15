@@ -137,6 +137,21 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
             return View();
         }
 
+        public ActionResult AddPolicyManual(int autoId)
+        { 
+            List<SP_ReturnPolicy_Result> suitablePolicies=dataconnection.SP_ReturnPolicy(autoId).ToList();
+            ViewBag.suitablePolicies=suitablePolicies;
+
+            return View();
+        }
+
+        public ActionResult AddPolicyManual(SP_ReturnPolicy_Result policy)
+        {
+            //retrieve the userId and automobile Id and put them all into the activepolicy table.
+
+            return View();
+        }
+
         public ActionResult ExpandUserPolicy()
         {
             return View();

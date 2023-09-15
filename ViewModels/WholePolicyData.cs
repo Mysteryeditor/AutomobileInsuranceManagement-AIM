@@ -11,5 +11,7 @@ namespace AutomobileInsuranceManagement_AIM.ViewModels
         public Policy AllPolicies{ get; set; }
         public ActivePolicy ActivePolicies { get; set; }
         public Automobile AutomobileData { get; set; }
+
+
     }
 }

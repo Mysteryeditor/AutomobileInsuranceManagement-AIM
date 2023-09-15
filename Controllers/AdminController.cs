@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.EnterpriseServices;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -95,7 +96,7 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
 
 
         [HttpPost]
-        public ActionResult EditUser([Bind(Include = "userId,userName,roleId,email,password,DOB,policyActive,mobile,")] user t, HttpPostedFileBase ProfilePic)//add id in action and model
+        public ActionResult EditUser([Bind(Include = "userId,userName,roleId,email,password,DOB,policyActive,mobile")] user t, HttpPostedFileBase ProfilePic)//add id in action and model
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +105,16 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
                 if (freshData != null)
                 {
                     freshData.userName = t.userName;
-                    freshData.roleId = t.roleId;
+                    if (User.IsInRole("Admin"))
+                    {
+                        freshData.roleId = t.roleId;
+                    }
+
+                    else
+                    {
+                        freshData.roleId = 2;
+                    }
+                   
                     freshData.modifiedDate = DateTime.Now;
                     freshData.email = t.email;
                     freshData.password = t.password;
@@ -123,7 +133,17 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
                     dataconnection.Entry(freshData).State = EntityState.Modified;
                     dataconnection.SaveChanges();
 
-                    return RedirectToAction("UserList", "Admin");
+                    if (User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("UserList", "Admin");
+                    }
+
+                    else
+                    {
+                        return RedirectToAction("DashBoard", "Home");
+                    }
+
+                    
                 }
 
 
