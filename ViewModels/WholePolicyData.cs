@@ -8,9 +8,12 @@ namespace AutomobileInsuranceManagement_AIM.ViewModels
 {
     public class WholePolicyData
     {
-        public Policy AllPolicies{ get; set; }
+        public Policy AllPolicies { get; set; }
+        //public IEnumerable<Policy> AllPolicies { get; set; }
         public ActivePolicy ActivePolicies { get; set; }
-        public Automobile AutomobileData { get; set; }
+        //public IEnumerable<ActivePolicy> ActivePolicies { get; set; }
+        public Automobile AutomobileData { get;set; }
+        //public IEnumerable<Automobile> AutomobileData { get; set; }
 
 
     }

@@ -59,10 +59,6 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
                     {
                         photo = br.ReadBytes(profilePic.ContentLength);
                     }
-                    //EncryptionandDecryption encryptPassword=new EncryptionandDecryption();
-                    //var v=typeof(EncryptionandDecryption).GetMethod("Encrypt", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(new EncryptionandDecryption(), newUser);
-                    //string encryptedPassword=encryptPassword.Encrypt(newUser.password, 0);
-                    //newUser.password = encryptedPassword;
                     newUser.policyActive = 0;
                     newUser.isDeleted = false;
                     newUser.createdDate = DateTime.Now;
@@ -92,9 +88,6 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
             List<user> modifiableUser = (from users in dataconnection.users where users.userId == editId select users).ToList();
             return View(modifiableUser.First());
         }
-
-
-
         [HttpPost]
         public ActionResult EditUser([Bind(Include = "userId,userName,roleId,email,password,DOB,policyActive,mobile")] user t, HttpPostedFileBase ProfilePic)//add id in action and model
         {
@@ -114,7 +107,7 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
                     {
                         freshData.roleId = 2;
                     }
-                   
+
                     freshData.modifiedDate = DateTime.Now;
                     freshData.email = t.email;
                     freshData.password = t.password;
@@ -129,9 +122,12 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
                         }
                         freshData.profilePic = newPic;
                     }
-                  
+
                     dataconnection.Entry(freshData).State = EntityState.Modified;
                     dataconnection.SaveChanges();
+                    user liveUser = dataconnection.users.Find(t.userId);
+                    Session["username"] = liveUser.userName;
+                    Session["profilePic"] = liveUser.profilePic;
 
                     if (User.IsInRole("Admin"))
                     {
@@ -143,7 +139,7 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
                         return RedirectToAction("DashBoard", "Home");
                     }
 
-                    
+
                 }
 
 

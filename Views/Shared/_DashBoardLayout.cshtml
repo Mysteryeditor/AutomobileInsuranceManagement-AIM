@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")" type="text/javascript"></script>
+
+    @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/journal/bootstrap.min.css" integrity="sha384-QDSPDoVOoSWz2ypaRUidLmLYl4RyoBWI44iA5agn6jHegBxZkNqgm2eHb6yZ5bYs" crossorigin="anonymous">*@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital@1&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F0ECE3;
+        }
+
+        .nav-link {
+            color: azure;
+            text-transform: uppercase;
+            font-size: 18px;
+            /*font-weight: bold;*/
+            font-family: 'Arvo', serif;
+        }
+
+            .nav-link:hover {
+                color: azure;
+            }
+
+
+        .button-link {
+            color: azure;
+            text-decoration: none;
+            font-size: 15px;
+            text-transform: capitalize;
+        }
+
+            .button-link:hover {
+                text-decoration: none;
+            }
+
+
+        ul {
+            list-style-type: none;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            border-right: 2px solid #C7B198;
+        }
+
+        .dashboard-content {
+            min-height: 85%;
+        }
+
+        .sidebar-links {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 500;
+            color: black;
+        }
+
+            .sidebar-links:hover {
+                font-size: 20px;
+                color: black;
+            }
+    </style>
+    <script src="https://kit.fontawesome.com/4f6b630aab.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>
+    <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+    @{
+        string username = Session["username"] as string;
+        byte[] profilePic = Session["profilePic"] as byte[];
+
+
+    }
+
+</head>
+<body>
+    <div class="container-fluid p-0">
+        <div class="row d-flex">
+            <div class="col-lg-3 p-0">
+                <div class="sidebar">
+                    <h1 class="text-black text-center mt-lg-5 pt-lg-5">AG</h1>
+
+                    <ul class="mt-lg-5">
+                        <li class="my-lg-2">
+                            <div class="d-flex justify-content-center">
+                                <i class="fa-solid fa-house fs-5"></i>
+                                <a class="sidebar-links" href="@Url.Action("DashBoard", "Home")">
+                                    Home
+                                </a>
+                            </div>
+                        </li>
+
+                        @if (User.IsInRole("Client"))
+                        {
+                            <li class="my-lg-2">
+                                <div class="d-flex justify-content-center">
+                                    <i class="fa-solid fa-motorcycle fs-5"></i>
+                                    <a class="sidebar-links" href="@Url.Action("ViewUserAuto", "Vehicle")">
+                                        Automobiles
+                                    </a>
+                                </div>
+                            </li>
+
+                            <li class="my-lg-2">
+                                <div class="d-flex justify-content-center">
+                                    <i class="fa-regular fa-handshake fs-5"></i>
+                                    <a class="sidebar-links" href="@Url.Action("ViewUserPolicy", "Policy")">
+                                        Policies
+                                    </a>
+                                </div>
+                            </li>
+
+
+                        }
+
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a href="@Url.Action("UserList", "Admin")" class="nav-item nav-link">Users</a>
+
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("PolicyList", "Policy")" class="nav-item nav-link">Products</a>
+                            </li>
+
+                            <li>
+                                <a href="@Url.Action("ViewUserPolicy", "Admin")" class="nav-item nav-link">Active Products</a>
+                            </li>
+
+
+
+                        }
+                        <li>
+                            <div class="d-flex justify-content-center">
+                                <i class="fa-solid fa-arrow-right-from-bracket fs-5"></i>
+                                <a class="sidebar-links" href="@Url.Action("Logout", "User")">
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+
+            </div>
+            <div class="col-lg-9 mt-lg-3 p-0">
+                @RenderBody()
+            </div>
+        </div>
+
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+<div class="container-fluid d-flex bg-dark p-lg-5">
+    @foreach (AutomobileInsuranceManagement_AIM.Models.SP_ReturnPolicy_Result po in ViewBag.suitablePolicies)
+    {
+        <div class="card col-lg-3 mt-lg-5">
+            <div class="card-title ">
+                <h3 class="text-center text-capitalize">
+                    @po.PolicyName
+                </h3>
+            </div>
+            <div class="card-body">
+                @po.description
+            </div>
+
+            <div class="card-footer">
+                @if (po != null)
+                {
+                    <button class="btn btn-primary">
+                        @Html.ActionLink("Choose", "CreatePolicyManual", "Policy", new { automobileId = po.automobileId, userId = po.userId, policyId = po.policyId, years = po.years, premium = po.Premium }, new { @class = "nav-link" })
+                    </button>
+
+                }
+
+
+            </div>
+
+        </div>
+    }
+    
+</div>

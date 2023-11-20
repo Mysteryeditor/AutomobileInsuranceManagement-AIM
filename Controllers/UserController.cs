@@ -15,7 +15,7 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
     public class UserController : Controller
     {
         // GET: User
-        AIMEntities dataconnection = new AIMEntities();
+        readonly AIMEntities dataconnection = new AIMEntities();
         public ActionResult Register()
         {
             //for admin
@@ -27,7 +27,7 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
 
         [HttpPost]
 
-        public ActionResult Register([Bind(Include = "userName,password,email,mobile,DOB")] user newUser, HttpPostedFileBase profilePic)
+        public ActionResult Register([Bind(Include = "userName,email,mobile,DOB")] user newUser,string password, HttpPostedFileBase profilePic)
         {
 
             bool uniqueEmail = true;
@@ -53,6 +53,7 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
                     //var v=typeof(EncryptionandDecryption).GetMethod("Encrypt", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(new EncryptionandDecryption(), newUser);
                     //string encryptedPassword=encryptPassword.Encrypt(newUser.password, 0);
                     //newUser.password = encryptedPassword;
+                    newUser.password =dataconnection.SP_PasswordEncrypt(password).First();
                     newUser.policyActive = 0;
                     newUser.isDeleted = false;
                     newUser.createdDate = DateTime.Now;
@@ -60,15 +61,15 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
                     newUser.roleId = 2;
                     newUser.profilePic = photo;
                     dataconnection.users.Add(newUser);
-
-                    dataconnection.SaveChanges(); return RedirectToAction("Login");
+                    dataconnection.SaveChanges();
+                    return RedirectToAction("Login");
                 }
             }
             else
             {
-                Response.Write("Email Already Exists");
+                ViewBag.ExistingEmail = "Email Already Exists";
             }
-
+            
             return View();
 
         }
@@ -78,10 +79,10 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Login(user loginCredentials)
+        public ActionResult Login(user loginCredentials,string decryptPassword)
         {
-            RoleDecider_Result validUserCredents = dataconnection.RoleDecider(loginCredentials.email, loginCredentials.password).FirstOrDefault();
-            switch (validUserCredents.userId.Value)
+            RoleDecider_Result validUserCredents = dataconnection.RoleDecider(loginCredentials.email, decryptPassword).FirstOrDefault();
+            switch (validUserCredents.userID.Value)
             {
 
                 case -1:
@@ -102,6 +103,8 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
                     Session["profilePic"] = liveUser.profilePic;
                     return RedirectToAction("DashBoard", "Home");
             }
+
+            ViewBag.InvalidCredentials = "Invalid UserName or Password";
             return View();
 
         }
@@ -118,6 +121,12 @@ namespace AutomobileInsuranceManagement_AIM.Controllers
             return View(EditUser);
         }
 
+        [HttpPost]
+        public ActionResult EditProfile(user editedUser)
+        {
+
+            return View();
+        }
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

@@ -22,5 +22,6 @@ namespace AutomobileInsuranceManagement_AIM.Models
         public string description { get; set; }
         public Nullable<int> automobileTypeId { get; set; }
         public Nullable<int> insuranceTypeId { get; set; }
+        public string TypeName { get; set; }
     }
 }

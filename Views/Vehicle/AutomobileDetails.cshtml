@@ -1,0 +1,76 @@
+﻿@model AutomobileInsuranceManagement_AIM.Models.Automobile
+
+@{
+    ViewBag.Title = "AutomobileDetails";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+
+}
+
+<h2>AutomobileDetails</h2>
+
+<div class="mt-5 p-5 container-fluid">
+    <h4>Automobile</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.registrationNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.registrationNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.chassisNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.chassisNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.manufactureYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.manufactureYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isInsured)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isInsured)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.company.companyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.company.companyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.carmodel.modelName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carmodel.modelName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.automobileId }) |*@
+    @Html.ActionLink("Back to List", "DashBoard","Home")
+</p>

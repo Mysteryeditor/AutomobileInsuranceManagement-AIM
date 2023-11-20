@@ -14,23 +14,15 @@ namespace AutomobileInsuranceManagement_AIM.Models
     public partial class SP_ReturnPolicy_Result
     {
         public int policyId { get; set; }
-        public string policyName { get; set; }
+        public string PolicyName { get; set; }
+        public string description { get; set; }
         public Nullable<decimal> claimAmount { get; set; }
         public Nullable<decimal> Premium { get; set; }
         public Nullable<int> years { get; set; }
-        public Nullable<bool> isDeleted { get; set; }
-        public string description { get; set; }
         public Nullable<int> automobileTypeId { get; set; }
         public Nullable<int> insuranceTypeId { get; set; }
-        public int automobile_Id { get; set; }
-        public string model { get; set; }
-        public string registration_number { get; set; }
-        public string chassis_number { get; set; }
-        public string brand { get; set; }
-        public int weight { get; set; }
-        public int manufacture_year { get; set; }
+        public int automobileId { get; set; }
         public Nullable<int> userId { get; set; }
-        public Nullable<int> vehicle_Type { get; set; }
         public Nullable<bool> isInsured { get; set; }
     }
 }

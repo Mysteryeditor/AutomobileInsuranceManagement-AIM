@@ -18,22 +18,27 @@ namespace AutomobileInsuranceManagement_AIM.Models
         public Automobile()
         {
             this.ActivePolicies = new HashSet<ActivePolicy>();
+            this.transactions = new HashSet<transaction>();
         }
     
-        public int automobile_Id { get; set; }
-        public string model { get; set; }
-        public string registration_number { get; set; }
-        public string chassis_number { get; set; }
-        public string brand { get; set; }
+        public int automobileId { get; set; }
+        public Nullable<int> vehicleTypeId { get; set; }
+        public Nullable<int> companyId { get; set; }
+        public string registrationNumber { get; set; }
+        public string chassisNumber { get; set; }
         public int weight { get; set; }
-        public int manufacture_year { get; set; }
+        public int manufactureYear { get; set; }
         public Nullable<int> userId { get; set; }
-        public Nullable<int> vehicle_Type { get; set; }
         public Nullable<bool> isInsured { get; set; }
+        public Nullable<int> modelId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivePolicy> ActivePolicies { get; set; }
+        public virtual company company { get; set; }
+        public virtual carmodel carmodel { get; set; }
         public virtual user user { get; set; }
         public virtual AutomobileType AutomobileType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<transaction> transactions { get; set; }
     }
 }

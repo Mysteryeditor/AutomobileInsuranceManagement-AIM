@@ -15,12 +15,13 @@ namespace AutomobileInsuranceManagement_AIM.Models
     public partial class ActivePolicy
     {
         public int ActiveId { get; set; }
+        public Nullable<int> userId { get; set; }
         public Nullable<int> policyId { get; set; }
         public Nullable<System.DateTime> createdDate { get; set; }
         public Nullable<System.DateTime> renewalDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        public Nullable<double> premium { get; set; }
         public Nullable<int> automobileId { get; set; }
-        public Nullable<int> userId { get; set; }
     
         public virtual Automobile Automobile { get; set; }
         public virtual Policy Policy { get; set; }

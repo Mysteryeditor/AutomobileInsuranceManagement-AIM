@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c9e6533d78bf4c04a3d0fb41359aabc3" Name="Diagram1">
+        <EntityTypeShape EntityType="AIMModel.ActivePolicy" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIMModel.Automobile" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIMModel.AutomobileType" Width="1.5" PointX="3.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIMModel.carmodel" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIMModel.company" Width="1.5" PointX="6" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIMModel.InsuranceType" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIMModel.Policy" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIMModel.Role" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIMModel.transaction" Width="1.5" PointX="10.5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIMModel.user" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <AssociationConnector Association="AIMModel.FK__ActivePol__autom__5AB9788F" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__ActivePol__polic__4C6B5938" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__ActivePol__userI__4B7734FF" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__Automobil__compa__40F9A68C" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__Automobil__model__55F4C372" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__Automobil__userI__42E1EEFE" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__Automobil__vehic__40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__transacti__autom__540C7B00" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__company__automob__25518C17" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__Policies__automo__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__carmodel__compan__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__Policies__insura__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__transacti__polic__5224328E" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__users__roleId__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK__transacti__userI__531856C7" ManuallyRouted="false" />
+        <AssociationConnector Association="AIMModel.FK_users_users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

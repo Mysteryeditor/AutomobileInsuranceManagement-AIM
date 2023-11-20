@@ -19,6 +19,7 @@ namespace AutomobileInsuranceManagement_AIM.Models
         {
             this.ActivePolicies = new HashSet<ActivePolicy>();
             this.Automobiles = new HashSet<Automobile>();
+            this.transactions = new HashSet<transaction>();
         }
     
         public int userId { get; set; }
@@ -31,14 +32,16 @@ namespace AutomobileInsuranceManagement_AIM.Models
         public Nullable<bool> isDeleted { get; set; }
         public Nullable<int> roleId { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
-        public string password { get; set; }
         public Nullable<int> policyActive { get; set; }
+        public byte[] password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ActivePolicy> ActivePolicies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Automobile> Automobiles { get; set; }
         public virtual Role Role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<transaction> transactions { get; set; }
         public virtual user users1 { get; set; }
         public virtual user user1 { get; set; }
     }

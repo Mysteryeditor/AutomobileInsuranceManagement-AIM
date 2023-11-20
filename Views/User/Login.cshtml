@@ -4,22 +4,13 @@
     ViewBag.Title = "Login";
 }
 <style>
-    .form-control {
-        border-radius: 0;
-    }
-
-        .form-control:focus {
-            box-shadow: none;
-        }
-
     .form-group {
         position: relative;
-        margin-bottom: 25px;
     }
 
         .form-group > .login-label {
             text-transform: uppercase;
-            font-size: 10px;
+            font-size: 13px;
             color: #a1a2a3;
             transform-origin: 0 0;
             transform: scale(1.4);
@@ -89,7 +80,7 @@
         color: #FFFFFF;
         font-size: 12px;
         font-weight: bold;
-        padding: 12px 45px;
+        padding: 12px 40px;
         letter-spacing: 1px;
         text-transform: uppercase;
         transition: transform 80ms ease-in;
@@ -133,7 +124,6 @@
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
         position: relative;
         overflow: hidden;
-        width: 768px;
         max-width: 100%;
         min-height: 480px;
     }
@@ -236,56 +226,136 @@
         transform: translateX(20%);
     }
 
-    .social-container {
-        margin: 20px 0;
+    .social-container a {
+        border: 1px solid #DDDDDD;
+        border-radius: 50%;
+        display: inline-flex;
+        /* justify-content: center*/
+        align-items: center;
+        margin: 0 5px;
+        height: 40px;
+        width: 40px;
     }
-
-        .social-container a {
-            border: 1px solid #DDDDDD;
-            border-radius: 50%;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 5px;
-            height: 40px;
-            width: 40px;
-        }
 </style>
-<div class="row d-flex justify-content-center">
-    <div class="card col-lg-3 col-md-10 col-sm-12 p-lg-2">
-        <div class="card-title fw-bold text-uppercase">
-            Member Portal
-        </div>
-        <div class="card-body">
-            @using (Html.BeginForm("Login", "User", FormMethod.Post))
-            {
-                <div class="form-group">
-                    @Html.LabelFor(m => m.email, new { @class = "login-label" })
-                    @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.email)
+
+<div class="justify-content-center d-flex p-5 bg-dark">
+    <div id="login" class="col-lg-11 col-md-10 col-sm-10 mt-lg-5">
+        <div class="authcontainer col-12" id="container">
+            <div class="form-container sign-up-container col-11">
+                @using (Html.BeginForm("Register", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal ">
+                        <div class="d-flex">
+                            <div class="col-lg-6">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.userName, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2 text-center" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control", placeholder = "example@gmail.com" } })
+                                        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-2" })
+
+
+                                    <div class="col-md-10">
+                                        <input name="password" id="password" type="password" class="form-control">
+                                        @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-7">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.DOB, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+
+                                        @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control", placeholder = "yyyy-mm-dd" } })
+                                        @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.mobile, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.mobile, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.profilePic, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <input name="profilePic" id="profilePic" type="file">
+                                        @Html.ValidationMessageFor(model => model.profilePic, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Register" class="btn btn-default" />
+                            </div>
+                        </div>  
+                    </div>
+                }
+
+            </div>
+            <div class="form-container sign-in-container col-6">
+
+                @using (Html.BeginForm("Login", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <h4>Policyholder Login</h4>
+                    <div class="form-group my-3">
+                        @Html.LabelFor(m => m.email, new { @class = "login-label" })
+                        @Html.TextBoxFor(m => m.email, new { @class = "form-control col-lg-12" })
+                        @Html.ValidationMessageFor(m => m.email)
+                        <label class="text-danger">@ViewBag.ExistingEmail</label>
+
+                    </div>
+
+                    <div class="form-group my-3">
+                        @Html.LabelFor(m => m.password, new { @class = "login-label" })
+                        <input type="password" class="form-control" name="decryptPassword">
+                        <label class="text-danger">@Html.ValidationMessageFor(m => m.password)</label>
+                        <label class="text-danger">@ViewBag.InvalidCredentials</label>
+                    </div>
+
+
+                    <div class="form-group my-3">
+                        <button type="submit" class="btn btn-primary col-lg-10">Access Account</button>
+                    </div>
+                }
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Welcome Back!</h1>
+                        <p>To keep connected with us please login with your personal info</p>
+                        <button class="ghost" id="signIn">Sign In</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Hello, Friend!</h1>
+                        <p>Enter your personal details and start journey with us</p>
+                        <button class="ghost" id="signUp">Sign Up</button>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(m => m.password, new { @class = "login-label" })
-                    @Html.PasswordFor(m => m.password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.password)
-                </div>
-
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Enter</button>
-                </div>
-
-
-                <button type="submit" click class="btn btn-primary">Register</button>
-
-
-            }
+            </div>
         </div>
     </div>
 </div>
-
-
 <script>
     $(() => {
 
@@ -303,61 +373,6 @@
     });
 
 </script>
-
-
-
-
-<!--Trigger-->
-
-<div id="login">
-    <div class="authcontainer" id="container">
-        <div class="form-container sign-up-container">
-            <form action="#">
-                <h1>Create Account</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email for registration</span>
-                <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <button>Sign Up</button>
-            </form>
-        </div>
-        <div class="form-container sign-in-container">
-            <form action="#">
-                <h1>Sign in</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your account</span>
-                <input type="email" placeholder="Email" />
-                <input type="password" placeholder="Password" />
-                <a href="#">Forgot your password?</a>
-                <button>Sign In</button>
-            </form>
-        </div>
-        <div class="overlay-container">
-            <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>Welcome Back!</h1>
-                    <p>To keep connected with us please login with your personal info</p>
-                    <button class="ghost" id="signIn">Sign In</button>
-                </div>
-                <div class="overlay-panel overlay-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start journey with us</p>
-                    <button class="ghost" id="signUp">Sign Up</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
     const signUpButton = document.getElementById('signUp');
     const signInButton = document.getElementById('signIn');
@@ -370,7 +385,4 @@
     signInButton.addEventListener('click', () => {
         container.classList.remove("right-panel-active");
     });
-
-
-
 </script>

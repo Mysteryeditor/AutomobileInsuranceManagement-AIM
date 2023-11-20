@@ -13,7 +13,7 @@ namespace AutomobileInsuranceManagement_AIM.Models
     
     public partial class RoleDecider_Result
     {
-        public Nullable<int> userId { get; set; }
+        public Nullable<int> userID { get; set; }
         public string Roles { get; set; }
     }
 }

@@ -1,38 +1,102 @@
 ﻿@{
     int? activecount = (int)Session["policyActive"];
 }
+<style>
+    .policy-cards {
+        background-color: #788e98;
+        min-height: 20%;
+    }
+
+    .choose-btn {
+        background-color: #F0ECE3;
+        color: black;
+        font-size:16px;
+    }
+
+        .choose-btn:hover {
+            transform:scale(1.2);
+            background-color: #F0ECE3;
+        }
+
+    .policy-cards > h6 {
+        color: black;
+    }
+
+    .text-peach {
+        color: #F0F5F9;
+        font-weight:400;
+
+    }
+
+    .color-dark {
+        color:#1E2022;
+    }
+
+    .bg-brown {
+        background-color: #DFD3C3;
+        border-radius: 10px;
+    }
+    
+</style>
+
 
 <div class="container-fluid col-10 p-3">
-
-    <p class="fs-6">Are you ready to hit the road with confidence, knowing that your precious vehicle is safeguarded against unexpected twists and turns? Look no further! Our Automobile Insurance Policy is tailor-made to provide you with comprehensive protection, giving you the peace of mind you deserve.</p>
+    <h3 class="color-dark bg-brown text-center col-lg-8 mx-auto">AutoGrand: Where Your Car's Protection Begins</h3>
+    <p class="fs-5 text-dark">Are you ready to hit the road with confidence, knowing that your precious vehicle is safeguarded against unexpected twists and turns? Look no further! Our Automobile Insurance Policy is tailor-made to provide you with comprehensive protection, giving you the peace of mind you deserve.</p>
     <h4 class="text-center">Choose A Policy</h4>
     <div class="d-flex row">
-        @foreach (AutomobileInsuranceManagement_AIM.Models.RETURNPOLICY_Result po in ViewBag.availablePolices)
+        @if (activecount < 1)
         {
-            <div class="card col-lg-3">
-                <div class="card-title ">
-                    <h3 class="text-center text-capitalize">
-                        @po.policyName
-                    </h3>
-                </div>
-                <div class="card-body">
-                    @po.description
-                </div>
+            foreach (AutomobileInsuranceManagement_AIM.Models.RETURNPOLICY_Result po in ViewBag.availablePolices)
+            {
+                <div class="card policy-cards col-lg-5 mx-2 my-2">
+                    <div class="card-title ">
+                        <h3 class="text-center text-peach text-capitalize text-decoration-underline fw-bold">
+                            @po.policyName
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <h6 class="color-dark col-lg-6">Description:</h6>
+                            <label class="text-peach fs-6"> @po.description</label>
+                        </div>
 
-                <div class="card-footer">
-                    <button class="btn-outline-primary">
-                        @Html.ActionLink("Choose", "AddUserPolicy", "Policy", new { policyId = po.policyId }, new { @class = "nav-link" })
-                    </button>
+                        <div class="d-flex">
+                            <h6 class="color-dark col-lg-6">Claim Amount:</h6>
+                            <label class="text-peach fs-6"> @Convert.ToInt64(@po.claimAmount)</label>
+                        </div>
 
-                    @if (activecount > 1)
-                    {
-                        <button class="btn-outline-primary">
-                            @Html.ActionLink("Choose", "AddUserPolicy", "Policy", new { policyId = po.policyId }, new { @class = "nav-link" })
-                        </button>
-                    }
+                        <div class="d-flex">
+                            <h6 class="color-dark col-lg-6">Premium:</h6>
+                            <label class="text-peach fs-6">@Convert.ToInt64(@po.Premium)</label>
+                        </div>
+
+                        <div class="d-flex">
+                            <h6 class="color-dark col-lg-6">Policy Type:</h6>
+                            <label class="text-peach fs-6">@po.TypeName</label>
+                        </div>
+
+                        <div class="d-flex">
+                            <h6 class="color-dark col-lg-6">Years:</h6>
+                            <label class="text-peach fs-6">@po.years</label>
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer justify-content-center d-flex">
+
+                        <a class="btn choose-btn fw-bold col-lg-3" href="@Url.Action("AddUserPolicy", "Policy", new { policyId = po.policyId })">Choose</a>
+
+
+                    </div>
+
                 </div>
-
-            </div>
+            }
         }
     </div>
 </div>
+
+@if (activecount > 1)
+{
+
+}

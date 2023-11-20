@@ -1,0 +1,106 @@
+﻿@{
+    string username = Session["username"] as string;
+    byte[] profilePic = Session["profilePic"] as byte[];
+
+
+}
+
+
+
+<nav class="navbar fixed-top navbar-fixed-top navbar-expand-lg px-0 py-3 mb-5">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand" href="#">
+            <!-- <img src="https://preview.webpixels.io/web/img/logos/clever-light.svg" class="h-8" alt="..."> -->
+            <img src="@Url.Content("~/Content/images/AG_LOGO-removebg-preview.png")" class="img-fluid" style="width:70px;height:50px" alt="logo">
+        </a>
+        <!-- Navbar toggle -->
+        <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <i class="fa-brands fa-buromobelexperte"></i>
+        </button>
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <!-- Nav -->
+            <div class="navbar-nav mx-lg-auto" id="top">
+                @*@if (!User.Identity.IsAuthenticated)
+        {
+
+            <a aria-current="page" href="@Url.Action("Index", "Home")" class="nav-item nav-link active text-white">Home</a>
+        }
+
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink("AIM", "DashBoard", "Home", new { area = "" }, new { @class = "nav-item nav-link" })
+
+        }*@
+                @if (User.IsInRole("User") || !User.Identity.IsAuthenticated)
+                {
+                    <a href="@Url.Action("Index", "Home")" class="nav-item nav-link">Home</a>
+                    <a href="@Url.Action("Contact", "Contact")" class="nav-item nav-link">Products</a>
+                    <a href="@Url.Action("About", "About")" class="nav-item nav-link">About Us</a>
+
+                }
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="@Url.Action("UserList", "Admin")" class="nav-item nav-link">Users</a>
+                    <a href="@Url.Action("PolicyList", "Admin")" class="nav-item nav-link">Products</a>
+                    <a href="@Url.Action("ViewUserPolicy", "Admin")" class="nav-item nav-link">Active Products</a>
+
+
+                }
+
+
+
+
+
+            </div>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <!-- Right navigation -->
+                <div class="navbar-nav ms-lg-4" id="right">
+                    <a class="nav-item nav-link" href="@Url.Action("Login","User")">Sign in</a>
+                </div>
+                <!-- Action -->
+                <div class="d-flex align-items-lg-center mt-3 mx-lg-2 mt-lg-0">
+                    <a href="@Url.Action("Register", "User")" class="btn btn-lg w-full w-lg-auto nav-link" id="register">
+                        Register
+                    </a>
+                </div>
+            }
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul class="d-flex" style="list-style-type:none">
+                    <li class="ms-auto mx-2">
+                        <label class="text-white">@username</label><img src="data:image;base64,@Convert.ToBase64String(profilePic)" alt="Employee Image" class="rounded-circle ms-1" width="60" height="40" />
+                        <button class="btn btn-danger">@Html.ActionLink("Logout", "Logout", "User", new { area = "" }, new { @class = "nav-link" })</button>
+                    <li>@Html.ActionLink("Edit User", "EditProfile", "User", new { area = "" }, new { @class = "nav-link" })</li>
+
+                </ul>
+
+            }
+            @*<@Html.ActionLink("Send", "Index", "Email", new { area = "" }, new { @class = "nav-link" }) *@
+        </div>
+    </div>
+</nav>
+
+<style>
+    .navbar-fixed-top.scrolled {
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+        box-shadow: inset 0 0 0 200px rgba(255, 255, 255, 0.103);
+    }
+</style>
+
+
+<script>
+    //Navbar Scrolldown BG-color Changes
+    $(function () {
+        $(document).scroll(function () {
+            var $nav = $(".navbar-fixed-top");
+            $nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
+        });
+    });
+</script>

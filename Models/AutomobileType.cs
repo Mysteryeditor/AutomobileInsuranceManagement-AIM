@@ -18,6 +18,7 @@ namespace AutomobileInsuranceManagement_AIM.Models
         public AutomobileType()
         {
             this.Automobiles = new HashSet<Automobile>();
+            this.companies = new HashSet<company>();
             this.Policies = new HashSet<Policy>();
         }
     
@@ -26,6 +27,8 @@ namespace AutomobileInsuranceManagement_AIM.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Automobile> Automobiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<company> companies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Policy> Policies { get; set; }
     }

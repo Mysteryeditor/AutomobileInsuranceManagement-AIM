@@ -7,95 +7,51 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <script src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")" type="text/javascript"></script>
+
+    @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.5.2/dist/journal/bootstrap.min.css" integrity="sha384-QDSPDoVOoSWz2ypaRUidLmLYl4RyoBWI44iA5agn6jHegBxZkNqgm2eHb6yZ5bYs" crossorigin="anonymous">*@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arvo:ital@1&display=swap" rel="stylesheet">
     <style>
-        .anchorTags {
-            text-decoration: none;
+        .nav-link {
             color: azure;
+            text-transform: uppercase;
+            font-size: 18px;
+            /*font-weight: bold;*/
+            font-family: 'Arvo', serif;
         }
 
-            .anchorTags:hover {
+            .nav-link:hover {
                 color: azure;
             }
 
-        a {
+
+        .button-link {
+            color: azure;
             text-decoration: none;
+            font-size: 15px;
+            text-transform: capitalize;
         }
+
+            .button-link:hover {
+                text-decoration: none;
+            }
     </style>
+    <script src="https://kit.fontawesome.com/4f6b630aab.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://lipis.github.io/bootstrap-sweetalert/lib/sweet-alert.js"></script>
     <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
-    @{
-        string username = Session["username"] as string;
-        byte[] profilePic = Session["profilePic"] as byte[];
 
-
-    }
 </head>
 <body>
+    <div class="container-fluid">
+        @Html.Partial("_NavBar")
+    </div>
 
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @if (!User.Identity.IsAuthenticated)
-            {
-                @Html.ActionLink("AIM", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            }
+    <div class="container-fluid p-0">
 
-            @if (User.Identity.IsAuthenticated)
-            {
-                @Html.ActionLink("AIM", "DashBoard", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        @RenderBody()
 
-            }
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    @if (User.IsInRole("User") || !User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    }
-
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li>@Html.ActionLink("Users", "UserList", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("All Policies", "PolicyList", "Policy", new { area = "" }, new { @class = "nav-link" })</li>
-                        <li>@Html.ActionLink("User Policies", "ViewUserPolicy", "Policy", new { area = "" }, new { @class = "nav-link" })</li>
-
-
-                    }
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-
-                        <li class="ms-auto mx-2"><button class="btn btn-outline-primary">@Html.ActionLink("Register", "Register", "User", new { area = "" }, new { @class = "anchorTags" })</button></li>
-                        <li><button class="btn btn-outline-danger">@Html.ActionLink("Login", "Login", "User", new { area = "" }, new { @class = "anchorTags" })</button></li>
-                    }
-
-                    @if (User.Identity.IsAuthenticated)
-                    {
-
-                        <li class="ms-auto mx-2">
-                            <label class="text-white">@username</label><img src="data:image;base64,@Convert.ToBase64String(profilePic)" alt="Employee Image" class="rounded-circle ms-1" width="60" height="40" />
-                            <button class="btn btn-outline-danger">@Html.ActionLink("Logout", "Logout", "User", new { area = "" }, new { @class = "anchorTags" })</button>
-                        </li>
-
-                    }
-
-                    <li>@Html.ActionLink("Edit User", "EditProfile", "User", new { area = "" }, new { @class = "nav-link" })</li>
-
-
-                </ul>
-
-                @*<button id="button">fagaefgferagaergaergaerggraerg</button>*@
-            </div>
-        </div>
-    </nav>
-    <div class="container-fluid body-content">
-        <div class="container">
-            @RenderBody()
-        </div>
     </div>
     <script type="text/javascript">
         $("#button").click(function () {

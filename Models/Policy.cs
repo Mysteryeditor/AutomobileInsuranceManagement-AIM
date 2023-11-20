@@ -18,6 +18,7 @@ namespace AutomobileInsuranceManagement_AIM.Models
         public Policy()
         {
             this.ActivePolicies = new HashSet<ActivePolicy>();
+            this.transactions = new HashSet<transaction>();
         }
     
         public int policyId { get; set; }
@@ -34,5 +35,7 @@ namespace AutomobileInsuranceManagement_AIM.Models
         public virtual ICollection<ActivePolicy> ActivePolicies { get; set; }
         public virtual AutomobileType AutomobileType { get; set; }
         public virtual InsuranceType InsuranceType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<transaction> transactions { get; set; }
     }
 }
